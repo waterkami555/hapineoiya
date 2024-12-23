@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画像表示システム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>D3I6F11I5B8F6</h1>
+    <input type="text" id="password" placeholder="000-999" maxlength="3">
+    <button onclick="showImage()">表示</button>
+
+    <div id="image-container"></div>
+
+    <script>
+        function showImage() {
+            const password = document.getElementById("password").value;
+            const imageContainer = document.getElementById("image-container");
+
+            // 入力チェック
+            if (password.match(/^\d{3}$/)) {
+                // 画像URLを作成
+                const imageUrl = `images/${password}.png`;
+
+                // コンテナをクリア
+                imageContainer.innerHTML = "";
+
+                // 画像を作成
+                const img = document.createElement("img");
+                img.src = imageUrl;
+                img.alt = `画像: ${password}`;
+                img.onerror = function () {
+                    imageContainer.innerHTML = "<p style='color:red;'>画像が見つかりません。</p>";
+                };
+
+                // コンテナに画像を追加
+                imageContainer.appendChild(img);
+            } else {
+                imageContainer.innerHTML = "<p style='color:red;'>3桁の数字を正しく入力してください。</p>";
+            }
+        }
+    </script>
+</body>
+</html>
